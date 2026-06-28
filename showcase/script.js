@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ───── SCREEN GALLERY SWITCHER ─────
-  const tabs = document.querySelectorAll('.showcase-tab');
-  const slides = document.querySelectorAll('.showcase-slide');
+  const tabs = document.querySelectorAll('.gtab');
+  const slides = document.querySelectorAll('.gslide');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     currentQ.options.forEach((opt, idx) => {
       const optionEl = document.createElement('div');
-      optionEl.className = 'sandbox-option';
+      optionEl.className = 'sandbox-opt';
       optionEl.innerHTML = `
         <span style="display:flex; align-items:center; gap:12px;">
           <span style="font-size:18px;">${opt.icon}</span>
@@ -162,23 +162,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showLoadingState() {
-    // Render a temporary loading spinner state inside the card
-    const header = questionnaireCard.querySelector('.sandbox-card-header');
-    const body = questionnaireCard.querySelector('.sandbox-card-body');
-    const footer = questionnaireCard.querySelector('.sandbox-card-footer');
+    // Hide standard question card content
+    const top = questionnaireCard.querySelector('.sandbox-top');
+    const qText = questionnaireCard.querySelector('#sandboxQuestion');
+    const opts = questionnaireCard.querySelector('#sandboxOptions');
+    const foot = questionnaireCard.querySelector('.sandbox-foot');
     
-    if (header) header.classList.add('hidden');
-    if (footer) footer.classList.add('hidden');
+    if (top) top.classList.add('hidden');
+    if (qText) qText.classList.add('hidden');
+    if (opts) opts.classList.add('hidden');
+    if (foot) foot.classList.add('hidden');
     
-    body.innerHTML = `
-      <div class="sandbox-loading">
-        <div class="spinner"></div>
-        <h3 style="font-family:var(--font-title); font-size:18px;">Analyzing skills and career parameters...</h3>
-        <p style="color:var(--color-text-muted); font-size:13px; text-align:center;">
-          AI is compiling customized learning tracks and video tutorial search filters...
-        </p>
-      </div>
+    // Create or show loading container
+    let loadingDiv = questionnaireCard.querySelector('.sandbox-loading');
+    if (!loadingDiv) {
+      loadingDiv = document.createElement('div');
+      loadingDiv.className = 'sandbox-loading';
+      questionnaireCard.appendChild(loadingDiv);
+    }
+    
+    loadingDiv.innerHTML = `
+      <div class="spinner"></div>
+      <h3 style="font-family:var(--font-title); font-size:18px; margin-top: 16px; margin-bottom: 8px;">Analyzing skills and career parameters...</h3>
+      <p style="color:var(--muted); font-size:13.5px; text-align:center;">
+        AI is compiling customized learning tracks and video tutorial search filters...
+      </p>
     `;
+    loadingDiv.classList.remove('hidden');
 
     // Wait 1.5 seconds to mock live API call, then render roadmap results
     setTimeout(() => {
@@ -292,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     milestones.forEach((m, idx) => {
       const milestoneEl = document.createElement('div');
-      milestoneEl.className = 'sandbox-milestone';
+      milestoneEl.className = 'milestone-item';
       
       // Build tasks HTML with smart YouTube search links
       let tasksHtml = '';
@@ -303,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         tasksHtml += `
           <a href="${youtubeUrl}" target="_blank" class="sandbox-task-link" style="text-decoration:none;">
-            <span style="font-size:10px; background-color:rgba(79, 70, 229, 0.08); border:1px solid rgba(79, 70, 229, 0.25); color:var(--color-secondary); padding:4px 8px; border-radius:6px; font-weight:600; display:inline-flex; align-items:center; gap:4px; cursor:pointer;">
+            <span style="font-size:11px; background-color:rgba(59, 130, 246, 0.08); border:1px solid rgba(59, 130, 246, 0.2); color:var(--blue); padding:4px 8px; border-radius:6px; font-weight:600; display:inline-flex; align-items:center; gap:4px; cursor:pointer;">
               📺 ${t}
             </span>
           </a>
@@ -311,10 +321,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       milestoneEl.innerHTML = `
-        <span class="sandbox-milestone-week">Week ${idx + 1}</span>
-        <div class="sandbox-milestone-info">
-          <h4>${m.title}</h4>
-          <p>${m.desc}</p>
+        <span class="milestone-week">Week ${idx + 1}</span>
+        <div class="milestone-info" style="flex-grow: 1;">
+          <h4 class="milestone-title" style="margin-bottom: 4px;">${m.title}</h4>
+          <p class="milestone-sub">${m.desc}</p>
           <div class="sandbox-milestone-tasks" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
             ${tasksHtml}
           </div>
@@ -334,22 +344,18 @@ document.addEventListener('DOMContentLoaded', () => {
       
       resultsCard.classList.add('hidden');
       
-      // Reset original card body
-      const header = questionnaireCard.querySelector('.sandbox-card-header');
-      const body = questionnaireCard.querySelector('.sandbox-card-body');
-      const footer = questionnaireCard.querySelector('.sandbox-card-footer');
+      // Restore questionnaire elements
+      const top = questionnaireCard.querySelector('.sandbox-top');
+      const qText = questionnaireCard.querySelector('#sandboxQuestion');
+      const opts = questionnaireCard.querySelector('#sandboxOptions');
+      const foot = questionnaireCard.querySelector('.sandbox-foot');
+      const loadingDiv = questionnaireCard.querySelector('.sandbox-loading');
       
-      if (header) header.classList.remove('hidden');
-      if (footer) footer.classList.remove('hidden');
-      
-      body.innerHTML = `
-        <h3 class="sandbox-question" id="sandboxQuestion">What career path do you want to master?</h3>
-        <div class="sandbox-options" id="sandboxOptions"></div>
-      `;
-      
-      // Re-link DOM references that were rewritten
-      sandboxQuestionText = document.getElementById('sandboxQuestion');
-      sandboxOptionsContainer = document.getElementById('sandboxOptions');
+      if (top) top.classList.remove('hidden');
+      if (qText) qText.classList.remove('hidden');
+      if (opts) opts.classList.remove('hidden');
+      if (foot) foot.classList.remove('hidden');
+      if (loadingDiv) loadingDiv.classList.add('hidden');
       
       questionnaireCard.classList.remove('hidden');
       
