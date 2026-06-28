@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "894169962726",
+    "project_id": "careerai-13496",
+    "storage_bucket": "careerai-13496.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894169962726:android:b4d46db2b1f693dcba4327",
+        "android_client_info": {
+          "package_name": "com.kavitha814.careerai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894169962726-avavgoamgieip25biiofr46flec1h1dj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kavitha814.careerai",
+            "certificate_hash": "17da8d124b9c3a4c9701f2da982d68208ccc4fa1"
+          }
+        },
+        {
+          "client_id": "894169962726-652httbhg3bcrnss6opkpdnbel5hkpll.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT9KAscSMUwtlbYBoV0_6r_NfkY7KPMLI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894169962726-652httbhg3bcrnss6opkpdnbel5hkpll.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
