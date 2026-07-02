@@ -893,6 +893,454 @@ img { display: block; max-width: 100%; }
   color: rgba(255,255,255,0.3);
 }
 
+/* ── GENUI SECTION ── */
+.genui-tech {
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(59, 130, 246, 0.03) 100%);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.genui-visualizer {
+  max-width: 1000px;
+  margin: 0 auto 48px;
+}
+.genui-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.gt-tab {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: var(--muted);
+  padding: 10px 24px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.22s var(--ease);
+}
+.gt-tab:hover {
+  color: var(--navy);
+  border-color: rgba(30, 58, 138, 0.3);
+  background: rgba(30, 58, 138, 0.02);
+}
+.gt-tab.active {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+}
+
+.genui-content-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* Editor Pane */
+.editor-pane {
+  background: #0f172a;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-align: left;
+}
+.editor-header {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  background: rgba(15, 23, 42, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.editor-header .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.editor-header .dot.red { background: #ef4444; }
+.editor-header .dot.yellow { background: #f59e0b; }
+.editor-header .dot.green { background: #10b981; }
+.editor-title {
+  margin-left: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.5px;
+}
+.editor-code {
+  padding: 24px;
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: auto;
+  height: 440px;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+/* Syntax Highlighting */
+.json-key { color: #38bdf8; }       /* Light blue keys */
+.json-string { color: #34d399; }    /* Emerald strings */
+.json-number { color: #fb923c; }    /* Orange numbers */
+.json-boolean { color: #a78bfa; }   /* Purple booleans */
+.json-null { color: #94a3b8; }      /* Slate nulls */
+
+/* Render Pane */
+.render-pane {
+  background: rgba(30, 58, 138, 0.02);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.phone-frame-mini {
+  width: 290px;
+  height: 440px;
+  background: #f1f5f9;
+  border-radius: 36px;
+  border: 8px solid var(--dark-2);
+  box-shadow: 
+    0 20px 40px rgba(15, 23, 42, 0.12),
+    0 5px 15px rgba(30, 58, 138, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  text-align: left;
+}
+.phone-frame-mini .gphone-notch {
+  width: 80px;
+  height: 18px;
+  background: var(--dark-2);
+  border-radius: 0 0 12px 12px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+.phone-app-header {
+  background: var(--navy);
+  color: var(--white);
+  padding: 24px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+.phone-header-title {
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+.phone-header-status {
+  font-size: 9px;
+  opacity: 0.75;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+.phone-header-status::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: #10b981;
+  border-radius: 50%;
+  display: inline-block;
+}
+.phone-app-body {
+  padding: 12px;
+  overflow-y: auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f8fafc;
+}
+
+/* Mock Widgets Styles */
+.mock-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(30, 58, 138, 0.08);
+}
+.mock-card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.mock-card-icon {
+  font-size: 16px;
+  color: var(--blue);
+}
+.mock-card-title {
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+.mock-card-subtitle {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: -10px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+/* Mock Timeline */
+.mock-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mock-timeline-item {
+  display: flex;
+  gap: 10px;
+}
+.mock-timeline-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mock-timeline-week {
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--navy);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+.mock-timeline-line {
+  width: 1.5px;
+  background: rgba(30, 58, 138, 0.1);
+  flex-grow: 1;
+  margin-top: 4px;
+}
+.mock-timeline-item:last-child .mock-timeline-line {
+  display: none;
+}
+.mock-timeline-right {
+  padding-bottom: 10px;
+}
+.mock-timeline-item-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+}
+.mock-timeline-item-desc {
+  font-size: 9.5px;
+  color: var(--muted);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+.mock-timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+.mock-timeline-tag {
+  font-size: 8.5px;
+  background: rgba(15, 23, 42, 0.03);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: var(--dark-3);
+}
+
+/* Mock Checklist */
+.mock-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mock-checklist-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  cursor: pointer;
+}
+.mock-checklist-checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid var(--muted);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.mock-checklist-row.completed .mock-checklist-checkbox {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.mock-checklist-checkbox::after {
+  content: "✓";
+  color: var(--white);
+  font-size: 11px;
+  font-weight: bold;
+  display: none;
+}
+.mock-checklist-row.completed .mock-checklist-checkbox::after {
+  display: block;
+}
+.mock-checklist-label {
+  font-size: 11.5px;
+  color: var(--text);
+  transition: color 0.15s, text-decoration 0.15s;
+}
+.mock-checklist-row.completed .mock-checklist-label {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+/* Mock Gap Analysis */
+.mock-gap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.mock-gap-chart {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: conic-gradient(var(--blue) var(--percent), rgba(59, 130, 246, 0.15) 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mock-gap-chart::after {
+  content: attr(data-score);
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text);
+}
+.mock-gap-section-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+.mock-gap-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.mock-gap-chip {
+  font-size: 8.5px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 6px;
+}
+.mock-gap-chip.match {
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.08);
+  border: 1px solid rgba(22, 163, 74, 0.15);
+}
+.mock-gap-chip.missing {
+  color: #ea580c;
+  background: rgba(234, 88, 12, 0.08);
+  border: 1px solid rgba(234, 88, 12, 0.15);
+}
+
+/* Mock Buttons */
+.mock-btn-filled {
+  background: var(--navy);
+  color: var(--white);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-align: center;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.15s;
+}
+.mock-btn-filled:hover {
+  background: var(--blue);
+}
+.mock-btn-outlined {
+  border: 1px solid var(--border);
+  color: var(--navy);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-align: center;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.15s;
+}
+.mock-btn-outlined:hover {
+  background: rgba(30, 58, 138, 0.04);
+}
+
+/* GenUI Feature Highlights */
+.genui-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 56px;
+  border-top: 1px solid var(--border);
+  padding-top: 48px;
+}
+.g-feat {
+  text-align: left;
+}
+.g-feat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+.g-feat h4 {
+  font-family: var(--font-title);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.g-feat p {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
   .hero {
@@ -911,6 +1359,10 @@ img { display: block; max-width: 100%; }
   .gslide-info ul { text-align: left; }
   .download-card { flex-direction: column; }
   .footer-inner { flex-direction: column; }
+  
+  /* GenUI Section Responsive */
+  .genui-content-grid { grid-template-columns: 1fr; gap: 24px; }
+  .render-pane { padding: 20px; }
 }
 
 @media (max-width: 640px) {
@@ -921,4 +1373,8 @@ img { display: block; max-width: 100%; }
   .gallery-tabs { flex-wrap: wrap; justify-content: center; width: 100%; }
   .section-title { font-size: 26px; }
   .download-card { padding: 24px; }
+  
+  /* GenUI Section Responsive */
+  .genui-features { grid-template-columns: 1fr; gap: 24px; margin-top: 32px; padding-top: 32px; }
+  .gt-tab { padding: 8px 16px; font-size: 12px; }
 }

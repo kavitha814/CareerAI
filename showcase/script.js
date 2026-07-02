@@ -364,4 +364,243 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ───── GENUI INTERACTIVE TECH VISUALIZER ─────
+  const genuiData = {
+    timeline: {
+      action: "createSurface",
+      catalogId: "careerPilotCatalog",
+      surfaceId: "s_timeline_1",
+      component: "TimelineItem",
+      data: {
+        title: "Flutter Developer Path",
+        milestones: [
+          {
+            week: 1,
+            title: "Dart Fundamentals",
+            description: "Master asynchronous programming, streams, OOP, and null safety.",
+            tasks: ["OOP", "Async/Await", "Null Safety"]
+          },
+          {
+            week: 2,
+            title: "UI Tree & Components",
+            description: "Build layout structures, responsive grids, and asset managers.",
+            tasks: ["Stateless/Stateful", "Layout constraints"]
+          }
+        ]
+      }
+    },
+    checklist: {
+      action: "createSurface",
+      catalogId: "careerPilotCatalog",
+      surfaceId: "s_checklist_1",
+      component: "SkillChecklist",
+      data: {
+        title: "Week 1 Checkpoints",
+        items: [
+          { id: "t1", label: "Implement async Fetch API call", completed: true },
+          { id: "t2", label: "Set up offline mock fallback engine", completed: false },
+          { id: "t3", label: "Define custom JSON schemas", completed: false }
+        ]
+      }
+    },
+    compare: {
+      action: "createSurface",
+      catalogId: "careerPilotCatalog",
+      surfaceId: "s_compare_1",
+      component: "SkillCompare",
+      data: {
+        currentPath: "Junior Developer",
+        targetPath: "Senior Architect",
+        matchPercentage: 65,
+        overlappingSkills: ["Flutter Core", "Git CLI", "Firebase Core"],
+        missingSkills: ["Riverpod", "Clean Architecture", "CI/CD Pipelines"]
+      }
+    }
+  };
+
+  const gtTabs = document.querySelectorAll('.gt-tab');
+  const jsonCodeEl = document.getElementById('jsonCode');
+  const previewContainer = document.getElementById('genuiWidgetPreview');
+
+  function syntaxHighlightJson(json) {
+    if (typeof json !== 'string') {
+      json = JSON.stringify(json, null, 2);
+    }
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, function (match) {
+      let cls = 'number';
+      if (/^"/.test(match)) {
+        if (/:$/.test(match)) {
+          cls = 'key';
+        } else {
+          cls = 'string';
+        }
+      } else if (/true|false/.test(match)) {
+        cls = 'boolean';
+      } else if (/null/.test(match)) {
+        cls = 'null';
+      }
+      return '<span class="json-' + cls + '">' + match + '</span>';
+    });
+  }
+
+  function logMockEvent(name, context) {
+    const logEl = document.getElementById('mockCardEvent');
+    if (logEl) {
+      logEl.style.display = 'block';
+      logEl.innerHTML = `<span style="color:var(--blue)">[Event Bus]</span> userAction: <strong>${name}</strong><br/>context: ${JSON.stringify(context)}`;
+    }
+  }
+
+  function renderGenUIWidget(target) {
+    if (!previewContainer) return;
+    previewContainer.innerHTML = '';
+
+    if (target === 'timeline') {
+      previewContainer.innerHTML = `
+        <div class="mock-card">
+          <div class="mock-card-title-row">
+            <span class="mock-card-icon">🗺️</span>
+            <span class="mock-card-title">Flutter Developer Path</span>
+          </div>
+          <div class="mock-timeline">
+            <div class="mock-timeline-item">
+              <div class="mock-timeline-left">
+                <span class="mock-timeline-week">W1</span>
+                <div class="mock-timeline-line"></div>
+              </div>
+              <div class="mock-timeline-right">
+                <span class="mock-timeline-item-title">Dart Fundamentals</span>
+                <p class="mock-timeline-item-desc">Master asynchronous programming, streams, OOP, and null safety.</p>
+                <div class="mock-timeline-tags">
+                  <span class="mock-timeline-tag">OOP</span>
+                  <span class="mock-timeline-tag">Async/Await</span>
+                  <span class="mock-timeline-tag">Null Safety</span>
+                </div>
+              </div>
+            </div>
+            <div class="mock-timeline-item">
+              <div class="mock-timeline-left">
+                <span class="mock-timeline-week">W2</span>
+                <div class="mock-timeline-line"></div>
+              </div>
+              <div class="mock-timeline-right">
+                <span class="mock-timeline-item-title">UI Tree & Components</span>
+                <p class="mock-timeline-item-desc">Build layout structures, responsive grids, and asset managers.</p>
+                <div class="mock-timeline-tags">
+                  <span class="mock-timeline-tag">Stateless/Stateful</span>
+                  <span class="mock-timeline-tag">Layout constraints</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-btn-filled" id="mockSaveTimelineBtn">Add Roadmap to Dashboard</div>
+          <div class="mock-card-footer" id="mockCardEvent"></div>
+        </div>
+      `;
+      document.getElementById('mockSaveTimelineBtn').addEventListener('click', () => {
+        logMockEvent('saveGeneratedRoadmap', { title: "Flutter Developer Path" });
+      });
+
+    } else if (target === 'checklist') {
+      previewContainer.innerHTML = `
+        <div class="mock-card">
+          <div class="mock-card-title-row">
+            <span class="mock-card-icon">✅</span>
+            <span class="mock-card-title">Week 1 Checkpoints</span>
+          </div>
+          <div class="mock-checklist" id="mockChecklistContainer">
+            <div class="mock-checklist-row completed" data-id="t1" data-label="Implement async Fetch API call">
+              <div class="mock-checklist-checkbox"></div>
+              <span class="mock-checklist-label">Implement async Fetch API call</span>
+            </div>
+            <div class="mock-checklist-row" data-id="t2" data-label="Set up offline mock fallback engine">
+              <div class="mock-checklist-checkbox"></div>
+              <span class="mock-checklist-label">Set up offline mock fallback engine</span>
+            </div>
+            <div class="mock-checklist-row" data-id="t3" data-label="Define custom JSON schemas">
+              <div class="mock-checklist-checkbox"></div>
+              <span class="mock-checklist-label">Define custom JSON schemas</span>
+            </div>
+          </div>
+          <div class="mock-card-footer" id="mockCardEvent"></div>
+        </div>
+      `;
+
+      const rows = document.querySelectorAll('.mock-checklist-row');
+      rows.forEach(row => {
+        row.addEventListener('click', () => {
+          row.classList.toggle('completed');
+          const isCompleted = row.classList.contains('completed');
+          const taskId = row.dataset.id;
+          const taskLabel = row.dataset.label;
+          logMockEvent('checkTaskState', { id: taskId, label: taskLabel, completed: isCompleted });
+        });
+      });
+
+    } else if (target === 'compare') {
+      previewContainer.innerHTML = `
+        <div class="mock-card">
+          <div class="mock-card-title-row">
+            <span class="mock-card-icon">📊</span>
+            <span class="mock-card-title">Skill Gap Analysis</span>
+          </div>
+          <p class="mock-card-subtitle">Junior Developer ➜ Senior Architect</p>
+          
+          <div class="mock-gap-header">
+            <div>
+              <div class="mock-gap-section-title">Matching Skills</div>
+            </div>
+            <div class="mock-gap-chart" data-score="65%" style="--percent: 65%;"></div>
+          </div>
+          
+          <div class="mock-gap-chips">
+            <span class="mock-gap-chip match">Flutter Core</span>
+            <span class="mock-gap-chip match">Git CLI</span>
+            <span class="mock-gap-chip match">Firebase Core</span>
+          </div>
+          
+          <div class="mock-gap-section-title">Missing Skills (Gap)</div>
+          <div class="mock-gap-chips">
+            <span class="mock-gap-chip missing">Riverpod</span>
+            <span class="mock-gap-chip missing">Clean Architecture</span>
+            <span class="mock-gap-chip missing">CI/CD Pipelines</span>
+          </div>
+          
+          <div class="mock-btn-outlined" id="mockGapBtn">Generate Roadmap to Bridge Gap</div>
+          <div class="mock-card-footer" id="mockCardEvent"></div>
+        </div>
+      `;
+      document.getElementById('mockGapBtn').addEventListener('click', () => {
+        logMockEvent('generateRoadmapForGap', { 
+          target: "Senior Architect", 
+          missing: ["Riverpod", "Clean Architecture", "CI/CD Pipelines"] 
+        });
+      });
+    }
+  }
+
+  function updateGenUISection(target) {
+    if (jsonCodeEl) {
+      jsonCodeEl.innerHTML = syntaxHighlightJson(genuiData[target]);
+    }
+    renderGenUIWidget(target);
+  }
+
+  if (gtTabs && gtTabs.length > 0) {
+    gtTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        gtTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        updateGenUISection(tab.dataset.target);
+      });
+    });
+
+    // Initial render for active tab
+    const activeTab = document.querySelector('.gt-tab.active');
+    if (activeTab) {
+      updateGenUISection(activeTab.dataset.target);
+    }
+  }
+
 });

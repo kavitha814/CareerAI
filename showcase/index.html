@@ -27,6 +27,7 @@
       </a>
       <ul class="nav-links">
         <li><a href="#features">Features</a></li>
+        <li><a href="#genui">GenUI Tech</a></li>
         <li><a href="#sandbox">Try Demo</a></li>
         <li><a href="#gallery">Screenshots</a></li>
         <li><a href="#download">Download</a></li>
@@ -38,6 +39,7 @@
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="#features">Features</a>
+      <a href="#genui">GenUI Tech</a>
       <a href="#sandbox">Try Demo</a>
       <a href="#gallery">Screenshots</a>
       <a href="#download">Download</a>
@@ -143,6 +145,69 @@
           </div>
           <h3>Offline Fallback</h3>
           <p>Local mock engine keeps you learning even when API quotas or network connectivity are unavailable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GENUI SECTION -->
+  <section class="genui-tech" id="genui">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-label">AI Render Engine</div>
+        <h2 class="section-title">Powered by GenUI</h2>
+        <p class="section-sub">A next-generation library that renders structured LLM schemas directly into native, interactive user interfaces.</p>
+      </div>
+
+      <div class="genui-visualizer">
+        <!-- Switcher Tabs -->
+        <div class="genui-tabs">
+          <button class="gt-tab active" data-target="timeline">Roadmap Timeline</button>
+          <button class="gt-tab" data-target="checklist">Skill Checklist</button>
+          <button class="gt-tab" data-target="compare">Gap Analysis</button>
+        </div>
+
+        <div class="genui-content-grid">
+          <!-- Code Editor Pane (JSON) -->
+          <div class="editor-pane">
+            <div class="editor-header">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+              <span class="editor-title">gemini_response.json</span>
+            </div>
+            <pre class="editor-code"><code id="jsonCode"></code></pre>
+          </div>
+
+          <!-- Mock Mobile Render Pane -->
+          <div class="render-pane">
+            <div class="phone-frame-mini">
+              <div class="gphone-notch"></div>
+              <div class="phone-app-header">
+                <span class="phone-header-title">Career Mentor AI</span>
+                <span class="phone-header-status">online</span>
+              </div>
+              <div class="phone-app-body" id="genuiWidgetPreview">
+                <!-- Dynamically rendered widgets go here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="genui-features">
+        <div class="g-feat">
+          <div class="g-feat-icon">🎯</div>
+          <h4>JSON Schema Enforced</h4>
+          <p>Enforces strict JSON schema validation via Google Generative AI structured outputs, avoiding raw text formatting errors.</p>
+        </div>
+        <div class="g-feat">
+          <div class="g-feat-icon">⚡</div>
+          <h4>Interactive Event Bus</h4>
+          <p>Generated elements dispatch action events (e.g., <code>checkTaskState</code>, <code>submitAnswer</code>) back to the parent Riverpod logic.</p>
+        </div>
+        <div class="g-feat">
+          <div class="g-feat-icon">🎨</div>
+          <h4>Layout Decoupled</h4>
+          <p>AI model determines content & properties, while the native Flutter application holds full control over rendering and accessibility.</p>
         </div>
       </div>
     </div>
